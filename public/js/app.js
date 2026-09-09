@@ -1,6 +1,7 @@
 /**
- * LA BIBLIA EN ACCIÓN - APLICACIÓN WEB INTERACTIVA (RESPONSIVA)
- * Lógica del cliente, conexión con API Node.js y componentes dinámicos
+ * LA BIBLIA EN ACCIÓN - APLICACIÓN WEB INTERACTIVA
+ * Escuela Dominical - Iglesia Asambleas de Dios Olivos
+ * Lógica del cliente, modales pedagógicos, trivia interactiva y soporte táctil móvil
  */
 
 // Datos pedagógicos detallados de cada estación bíblica
@@ -77,7 +78,7 @@ const TRIVIA_QUESTIONS = [
       { text: "Que los sueños nunca se cumplen", correct: false },
       { text: "Que solo debemos dibujar animales", correct: false }
     ],
-    explanation: "¡Exacto! Aunque José pasó por momentos difíciles, Dios tornó todo para bien y salvó a su familia."
+    explanation: "¡Exacto! Aunque José pasó por momentos difíciles, Dios tornó todo para bien y cuidó de su familia."
   },
   {
     question: "Según el Salmo 119:105, ¿qué es la Palabra de Dios para nuestras vidas?",
@@ -115,12 +116,12 @@ let currentTriviaIndex = 0;
 let triviaScore = 0;
 
 // ==========================================================================
-// INICIALIZACIÓN AL CARGAR EL DOM
+// INICIALIZACIÓN
 // ==========================================================================
 document.addEventListener('DOMContentLoaded', () => {
   initCountdown();
   initMobileMenu();
-  loadServerData();
+  loadReactions();
   setupEventListeners();
   loadTriviaQuestion();
 });
@@ -159,7 +160,7 @@ function initCountdown() {
 }
 
 // ==========================================================================
-// MENÚ RESPONSIVO PARA CELULARES
+// MENÚ RESPONSIVO PARA MÓVILES
 // ==========================================================================
 function initMobileMenu() {
   const toggleBtn = document.getElementById('menuToggle');
@@ -172,7 +173,7 @@ function initMobileMenu() {
       navLinks.classList.toggle('active');
     });
 
-    // Cerrar menú al hacer clic en cualquier enlace
+    // Cerrar menú al hacer clic en un enlace
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         toggleBtn.classList.remove('active');
@@ -180,7 +181,7 @@ function initMobileMenu() {
       });
     });
 
-    // Cerrar si se toca fuera del menú
+    // Cerrar si se hace clic fuera
     document.addEventListener('click', (e) => {
       if (!navLinks.contains(e.target) && !toggleBtn.contains(e.target)) {
         toggleBtn.classList.remove('active');
@@ -190,74 +191,50 @@ function initMobileMenu() {
   }
 }
 
+// Valores base por defecto
+const DEFAULT_REACTIONS = {
+  parvulos: 30,
+  principiantes: 24,
+  primarios: 36,
+  intermedios: 31,
+  preadolescentes: 27,
+  adolescentes: 34
+};
+
 // ==========================================================================
-// CARGA DE DATOS DESDE LA API NODE.JS
+// CARGAR REACCIONES DESDE LA API O LOCALSTORAGE (COMPATIBLE CON RENDER STATIC)
 // ==========================================================================
-async function loadServerData() {
+async function loadReactions() {
   try {
     const res = await fetch('/api/data');
-    if (!res.ok) throw new Error('No se pudo conectar al servidor');
+    if (!res.ok) throw new Error('Modo estático sin API');
     const data = await res.json();
 
-    // Actualizar contador de familias en apoyo
-    if (data.metaImpresora) {
-      const countEl = document.getElementById('collaboratorsCount');
-      if (countEl) {
-        countEl.textContent = `${data.metaImpresora.familiasApoyoCount || 0} familias`;
-      }
-    }
-
-    // Actualizar contadores de reacciones de estaciones
     if (data.estacionesReacciones) {
-      Object.keys(data.estacionesReacciones).forEach(stationKey => {
-        const countSpan = document.getElementById(`reactCount-${stationKey}`);
-        if (countSpan) {
-          countSpan.textContent = data.estacionesReacciones[stationKey];
-        }
-      });
+      applyReactions(data.estacionesReacciones);
+      return;
     }
-
-    // Renderizar chips de familias en apoyo
-    renderFamilias(data.familiasApoyo);
   } catch (error) {
-    console.warn('Operando con datos locales:', error);
+    // Fallback a localStorage para hosting estático puro en Render
+    const stored = JSON.parse(localStorage.getItem('estacionesReacciones') || 'null') || DEFAULT_REACTIONS;
+    applyReactions(stored);
   }
 }
 
-// Renderizar tarjetas de familias que apoyan
-function renderFamilias(familias) {
-  const container = document.getElementById('familiesContainer');
-  if (!container || !familias) return;
-
-  container.innerHTML = '';
-  familias.forEach(item => {
-    const chip = document.createElement('div');
-    chip.className = 'family-chip';
-    chip.innerHTML = `
-      <span>👨‍👩‍👧</span>
-      <span class="family-chip-name">${escapeHTML(item.nombre)}</span>
-      <span class="family-chip-type">${escapeHTML(item.tipo)}</span>
-    `;
-    container.appendChild(chip);
+function applyReactions(reactions) {
+  Object.keys(reactions).forEach(stationKey => {
+    const countSpan = document.getElementById(`reactCount-${stationKey}`);
+    if (countSpan) {
+      countSpan.textContent = reactions[stationKey];
+    }
   });
 }
 
-function escapeHTML(str) {
-  if (!str) return '';
-  return str.replace(/[&<>'"]/g, tag => ({
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    "'": '&#39;',
-    '"': '&quot;'
-  }[tag] || tag));
-}
-
 // ==========================================================================
-// LISTENERS Y EVENTOS DE INTERACCIÓN
+// EVENTOS Y MODALES
 // ==========================================================================
 function setupEventListeners() {
-  // Apertura de modal para estaciones
+  // Botones de estaciones
   document.querySelectorAll('[data-station-id]').forEach(btn => {
     btn.addEventListener('click', () => {
       const stationId = btn.getAttribute('data-station-id');
@@ -265,7 +242,7 @@ function setupEventListeners() {
     });
   });
 
-  // Reacciones a estaciones bíblicas
+  // Reacciones a estaciones
   document.querySelectorAll('.btn-react').forEach(btn => {
     btn.addEventListener('click', async (e) => {
       e.stopPropagation();
@@ -288,15 +265,9 @@ function setupEventListeners() {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeModal();
   });
-
-  // Formulario de apoyo a la meta
-  const collabForm = document.getElementById('cooperationForm');
-  if (collabForm) {
-    collabForm.addEventListener('submit', handleCooperationSubmit);
-  }
 }
 
-// Manejar reacción (like) a estación
+// Manejar reacción (like) a estación con soporte para Node.js y Render Static Site
 async function handleReaction(stationKey, buttonEl) {
   try {
     const res = await fetch('/api/react', {
@@ -304,17 +275,30 @@ async function handleReaction(stationKey, buttonEl) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ stationId: stationKey })
     });
-    const result = await res.json();
-    if (result.success) {
-      const countSpan = document.getElementById(`reactCount-${stationKey}`);
-      if (countSpan) countSpan.textContent = result.newCount;
-      showToast('¡Gracias por apoyar esta estación bíblica! ❤️');
-      buttonEl.style.transform = 'scale(1.15)';
-      setTimeout(() => buttonEl.style.transform = '', 300);
+    if (res.ok) {
+      const result = await res.json();
+      if (result.success) {
+        const countSpan = document.getElementById(`reactCount-${stationKey}`);
+        if (countSpan) countSpan.textContent = result.newCount;
+        showToast('¡Gracias por apoyar esta estación bíblica! ❤️');
+        buttonEl.style.transform = 'scale(1.15)';
+        setTimeout(() => buttonEl.style.transform = '', 300);
+        return;
+      }
     }
   } catch (err) {
-    console.error('Error al reaccionar:', err);
+    // Modo estático puro
   }
+
+  // Fallback con localStorage si no hay servidor backend
+  const stored = JSON.parse(localStorage.getItem('estacionesReacciones') || 'null') || { ...DEFAULT_REACTIONS };
+  stored[stationKey] = (stored[stationKey] || 0) + 1;
+  localStorage.setItem('estacionesReacciones', JSON.stringify(stored));
+  const countSpan = document.getElementById(`reactCount-${stationKey}`);
+  if (countSpan) countSpan.textContent = stored[stationKey];
+  showToast('¡Gracias por apoyar esta estación bíblica! ❤️');
+  buttonEl.style.transform = 'scale(1.15)';
+  setTimeout(() => buttonEl.style.transform = '', 300);
 }
 
 // Abrir modal con los datos pedagógicos completos
@@ -343,50 +327,6 @@ function closeModal() {
   document.body.style.overflow = '';
 }
 
-// Envío del formulario de apoyo (solo nombre y tipo de apoyo)
-async function handleCooperationSubmit(e) {
-  e.preventDefault();
-  const nombreInput = document.getElementById('collabName');
-  const tipoInput = document.getElementById('collabType');
-
-  const payload = {
-    nombre: nombreInput.value.trim(),
-    tipo: tipoInput.value
-  };
-
-  if (!payload.nombre) {
-    alert('Por favor, ingresa tu nombre o el de tu familia.');
-    return;
-  }
-
-  try {
-    const res = await fetch('/api/colaborar', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    const result = await res.json();
-
-    if (result.success) {
-      if (result.metaImpresora) {
-        document.getElementById('collaboratorsCount').textContent = `${result.metaImpresora.familiasApoyoCount} familias`;
-      }
-      loadServerData();
-      collabFormReset();
-      showToast('¡Bendiciones! Tu familia ha sido registrada con alegría 🌟');
-      triggerConfetti();
-    }
-  } catch (err) {
-    console.error('Error al registrar apoyo:', err);
-    showToast('Familia registrada con éxito. ¡Muchas gracias!');
-  }
-}
-
-function collabFormReset() {
-  const form = document.getElementById('cooperationForm');
-  if (form) form.reset();
-}
-
 // Toast de notificación
 function showToast(message) {
   let toast = document.getElementById('toastMsg');
@@ -398,7 +338,7 @@ function showToast(message) {
   }
   toast.textContent = message;
   toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 3500);
+  setTimeout(() => toast.classList.remove('show'), 3000);
 }
 
 // ==========================================================================

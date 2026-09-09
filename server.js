@@ -24,16 +24,14 @@ function readDB() {
   } catch (error) {
     console.error('Error al leer db.json:', error);
     return {
-      metaImpresora: { familiasApoyoCount: 18 },
       estacionesReacciones: {
-        parvulos: 29,
-        principiantes: 23,
-        primarios: 35,
-        intermedios: 30,
-        preadolescentes: 26,
-        adolescentes: 33
-      },
-      familiasApoyo: []
+        parvulos: 30,
+        principiantes: 24,
+        primarios: 36,
+        intermedios: 31,
+        preadolescentes: 27,
+        adolescentes: 34
+      }
     };
   }
 }
@@ -48,7 +46,7 @@ function writeDB(data) {
   }
 }
 
-// API: Obtener estadísticas y lista de apoyo
+// API: Obtener datos de reacciones
 app.get('/api/data', (req, res) => {
   const db = readDB();
   res.json(db);
@@ -73,46 +71,6 @@ app.post('/api/react', (req, res) => {
     success: true,
     stationId,
     newCount: db.estacionesReacciones[stationId]
-  });
-});
-
-// API: Registrar familia de apoyo (sin montos de dinero ni comentarios)
-app.post('/api/colaborar', (req, res) => {
-  const { nombre, tipo } = req.body;
-
-  if (!nombre || !nombre.trim()) {
-    return res.status(400).json({ error: 'El nombre es obligatorio' });
-  }
-
-  const db = readDB();
-  db.metaImpresora.familiasApoyoCount = (db.metaImpresora.familiasApoyoCount || 0) + 1;
-
-  const fechaHoy = new Date().toLocaleDateString('es-ES', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric'
-  });
-
-  const nuevaFamilia = {
-    id: Date.now(),
-    nombre: nombre.trim(),
-    tipo: tipo || 'Apoyo general',
-    fecha: fechaHoy
-  };
-
-  if (!db.familiasApoyo) db.familiasApoyo = [];
-  db.familiasApoyo.unshift(nuevaFamilia);
-
-  if (db.familiasApoyo.length > 50) {
-    db.familiasApoyo = db.familiasApoyo.slice(0, 50);
-  }
-
-  writeDB(db);
-
-  res.json({
-    success: true,
-    metaImpresora: db.metaImpresora,
-    nuevaFamilia
   });
 });
 
