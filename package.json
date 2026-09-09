@@ -1,0 +1,22 @@
+{
+  "name": "la-biblia-en-accion",
+  "version": "1.0.0",
+  "description": "Sitio web interactivo para la Feria del Mes de la Biblia - Escuela Dominical EDB",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "escuela-dominical",
+    "feria-biblica",
+    "kawaii",
+    "interactivo"
+  ],
+  "author": "Coordinación EDB",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}

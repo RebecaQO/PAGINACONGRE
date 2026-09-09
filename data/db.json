@@ -1,0 +1,33 @@
+{
+  "metaImpresora": {
+    "familiasApoyoCount": 18
+  },
+  "estacionesReacciones": {
+    "parvulos": 29,
+    "principiantes": 23,
+    "primarios": 35,
+    "intermedios": 30,
+    "preadolescentes": 26,
+    "adolescentes": 33
+  },
+  "familiasApoyo": [
+    {
+      "id": 1,
+      "nombre": "Familia Mamani Quispe",
+      "tipo": "Apoyo en la Kermesse y Almuerzo",
+      "fecha": "08/09/2026"
+    },
+    {
+      "id": 2,
+      "nombre": "Familia Flores",
+      "tipo": "Colaboración voluntaria para la Impresora",
+      "fecha": "08/09/2026"
+    },
+    {
+      "id": 3,
+      "nombre": "Familia Orellana",
+      "tipo": "Apoyo en la Zona de Postres y Dulces",
+      "fecha": "09/09/2026"
+    }
+  ]
+}

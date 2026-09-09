@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>La Biblia en Acción – Feria del Mes de la Biblia | Iglesia Asambleas de Dios Olivos</title>
+  <meta name="description" content="Plataforma interactiva de la Feria del Mes de la Biblia 'La Biblia en Acción', organizada por la Escuela Dominical de la Iglesia Asambleas de Dios Olivos.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐧</text></svg>">
+</head>
+<body>
+
+  <!-- Canvas para animación de confeti -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- ==========================================================================
+       BARRA DE NAVEGACIÓN SUPERIOR (RESPONSIVA)
+       ========================================================================== -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#inicio" class="nav-brand">
+        <div class="brand-icon">🐧</div>
+        <div class="brand-text">
+          <span class="brand-title">La Biblia en Acción</span>
+          <span class="brand-subtitle">Feria EDB • Olivos</span>
+        </div>
+      </a>
+
+      <!-- Botón Hamburguesa para Celulares -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú de navegación">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#inicio" class="nav-link">Inicio</a></li>
+        <li><a href="#bienvenida" class="nav-link">Bienvenida</a></li>
+        <li><a href="#cronograma" class="nav-link">Cronograma</a></li>
+        <li><a href="#estaciones" class="nav-link">Estaciones</a></li>
+        <li><a href="#trivia" class="nav-link">Desafío Bíblico</a></li>
+        <li><a href="#kermesse" class="nav-link">Kermesse & Ventas</a></li>
+        <li><a href="#cooperacion" class="nav-link">Meta Impresora</a></li>
+        <li><a href="#contacto" class="nav-link">Contacto</a></li>
+        <li><a href="#cooperacion" class="btn btn-primary btn-sm nav-cta">Quiero Apoyar ✨</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         SECCIÓN HERO / PORTADA PRINCIPAL
+         ========================================================================== -->
+    <section class="hero" id="inicio">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <div class="hero-badges">
+              <span class="badge-tag">Feria Dominical EDB</span>
+              <span class="badge-info highlight">📅 Domingo 27 de Octubre</span>
+              <span class="badge-info">📍 Asambleas de Dios Olivos</span>
+            </div>
+
+            <h1 class="hero-title">
+              La Biblia en Acción:
+              <span>Aprender, Participar y Compartir</span>
+            </h1>
+
+            <p class="hero-description">
+              Una fiesta congregacional donde niños, adolescentes y maestros dan vida a las Sagradas Escrituras mediante maquetas vivas, dinámicas lúdicas y una hermosa meta solidaria.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#estaciones" class="btn btn-primary">
+                <span>Explorar las Estaciones</span>
+                <span class="btn-icon">✨</span>
+              </a>
+              <a href="#cooperacion" class="btn btn-secondary">
+                <span>Sumarme al Apoyo</span>
+                <span class="btn-icon">🖨️</span>
+              </a>
+            </div>
+
+            <!-- Contador Regresivo Responsivo -->
+            <div class="countdown-box">
+              <div class="countdown-label">
+                <span>⏰ Cuenta regresiva para el gran día:</span>
+              </div>
+              <div class="countdown-grid">
+                <div class="count-card">
+                  <div class="count-num" id="countDays">00</div>
+                  <div class="count-unit">Días</div>
+                </div>
+                <div class="count-card">
+                  <div class="count-num" id="countHours">00</div>
+                  <div class="count-unit">Horas</div>
+                </div>
+                <div class="count-card">
+                  <div class="count-num" id="countMinutes">00</div>
+                  <div class="count-unit">Minutos</div>
+                </div>
+                <div class="count-card">
+                  <div class="count-num" id="countSeconds">00</div>
+                  <div class="count-unit">Segundos</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Portada Ilustrada con el Pingüino y Niños -->
+          <div class="hero-media">
+            <div class="floating-pill pill-1">
+              <span>📖</span>
+              <span>¡6 Estaciones Bíblicas!</span>
+            </div>
+            <div class="hero-image-wrapper">
+              <img src="IMAGES/PORTADA — LA BIBLIA EN ACCIÓN.png" alt="Portada Oficial de La Biblia en Acción con la mascota pingüino y niños felices" loading="eager">
+            </div>
+            <div class="floating-pill pill-2">
+              <span>🍗</span>
+              <span>Kermesse & Postres</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECCIÓN BIENVENIDA & LEMA INSTITUCIONAL
+         ========================================================================== -->
+    <section class="welcome-section" id="bienvenida">
+      <div class="container">
+        <div class="welcome-card">
+          <div class="welcome-image-wrapper">
+            <img src="IMAGES/TODOS SOMOS PARTE DE LA FERIA.png" alt="Todos somos parte de la feria - Pingüino y niños dibujando" loading="lazy">
+          </div>
+
+          <div class="welcome-content">
+            <div class="badge-tag pastel">Nuestra Visión y Lema</div>
+            <h2 class="section-title">¡Bienvenidos a una Gran Fiesta Espiritual!</h2>
+            
+            <p>
+              La Escuela Dominical es el semillero donde plantamos la semilla incorruptible de la Palabra de Dios. En este Mes de la Biblia, abrimos las puertas para que toda la congregación sea testigo del talento, la fe y la dedicación de nuestros niños y jóvenes.
+            </p>
+
+            <div class="pastoral-quote">
+              “Instruye al niño en su camino, y aun cuando fuere viejo no se apartará de él.” — Proverbios 22:6
+              <div class="pastoral-meta">
+                Supervisión: Ptr. David Mamani | Directiva EDB: Rebeca Quispe & Miriam Orellana
+              </div>
+            </div>
+
+            <div class="pillars-grid">
+              <div class="pillar-item aprender">
+                <div class="pillar-icon">📖</div>
+                <h4 class="pillar-title">Aprender</h4>
+                <p class="pillar-desc">Profundizar en la historia y el poder de la Palabra de Dios.</p>
+              </div>
+
+              <div class="pillar-item participar">
+                <div class="pillar-icon">🎨</div>
+                <h4 class="pillar-title">Participar</h4>
+                <p class="pillar-desc">Crear maquetas, disertar y compartir la fe en comunidad.</p>
+              </div>
+
+              <div class="pillar-item compartir">
+                <div class="pillar-icon">🤝</div>
+                <h4 class="pillar-title">Compartir</h4>
+                <p class="pillar-desc">Unir a familias, ministerios y alcanzar la meta de la EDB.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECCIÓN CRONOGRAMA DE PREPARACIÓN
+         ========================================================================== -->
+    <section class="schedule-section" id="cronograma">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge-tag">Ruta de Trabajo</span>
+          <h2 class="section-title">Cronograma del Mes de la Biblia</h2>
+          <p class="section-subtitle">Tres fechas esenciales de preparación pedagógica, talleres creativos y la gran celebración dominical.</p>
+        </div>
+
+        <div class="timeline">
+          <!-- Fase 1 -->
+          <div class="timeline-card">
+            <span class="timeline-date-badge">13 de Septiembre</span>
+            <h3 class="timeline-title">Fase 1: Fundamento Bíblico</h3>
+            <p class="timeline-desc">
+              Asignación formal de los temas por clase, definición de versículos clave a memorizar y diseño conceptual de las actividades lúdicas.
+            </p>
+            <div class="timeline-team">
+              <span>👥</span>
+              <span>Responsables: Maestros y Alumnos</span>
+            </div>
+          </div>
+
+          <!-- Fase 2 -->
+          <div class="timeline-card">
+            <span class="timeline-date-badge">20 de Septiembre</span>
+            <h3 class="timeline-title">Fase 2: Taller de Producción</h3>
+            <p class="timeline-desc">
+              Elaboración artesanal de maquetas tridimensionales, paneles ilustrados, rotafolios y coordinación de insumos con el Ministerio de la Mujer.
+            </p>
+            <div class="timeline-team">
+              <span>✂️</span>
+              <span>Responsables: Maestros, Alumnos y Padres</span>
+            </div>
+          </div>
+
+          <!-- Fase 3 -->
+          <div class="timeline-card active">
+            <span class="timeline-date-badge">27 de Octubre</span>
+            <h3 class="timeline-title">Fase 3: Día Central de la Feria</h3>
+            <p class="timeline-desc">
+              Apertura del circuito de estaciones bíblicas, exposición de cursos, mini kermesse culinaria, venta de postres y clausura congregacional.
+            </p>
+            <div class="timeline-team">
+              <span>🎉</span>
+              <span>Responsables: Toda la Iglesia y EDB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECCIÓN ESTACIONES BÍBLICAS (CIRCUITO POR CURSOS)
+         ========================================================================== -->
+    <section class="stations-section" id="estaciones">
+      <div class="container">
+        <!-- Banner Introductorio con Imagen Oficial -->
+        <div class="stations-banner-card">
+          <div class="stations-banner-media">
+            <img src="IMAGES/FERIA POR ESTACIONES.png" alt="Feria por Estaciones Bíblicas - Pingüino y niños con tarjetas interactivas" loading="lazy">
+          </div>
+          <div class="stations-banner-content">
+            <span class="badge-tag">El Recorrido Oficial</span>
+            <h2 class="section-title">Circuito de Estaciones Bíblicas</h2>
+            <p style="color: var(--color-text-muted); margin-bottom: 1.25rem;">
+              Cada aula ha preparado una estación temática especial con materiales en relieve, láminas ilustradas y lecciones prácticas. ¡Toca <strong>"Ver Detalles Pedagógicos"</strong> para conocer los objetivos de cada curso y apoya con un corazón para animar a los niños!
+            </p>
+            <div class="station-meta-tags">
+              <span class="badge-info">🎯 6 Cursos Activos</span>
+              <span class="badge-info">👩‍🏫 10 Maestros Guías</span>
+              <span class="badge-info">⭐ Dinámicas y Maquetas</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rejilla con las 6 Estaciones -->
+        <div class="stations-grid">
+
+          <!-- Estación 1: Párvulos -->
+          <article class="station-card">
+            <div class="station-media">
+              <span class="station-age-badge">3 a 5 años</span>
+              <img src="IMAGES/PARVULOS.png" alt="Estación Párvulos: Creación y José" loading="lazy">
+            </div>
+            <div class="station-body">
+              <div class="station-header-info">
+                <span class="station-group-name">Párvulos</span>
+                <span class="station-teachers">Annet & Damaris</span>
+              </div>
+              <h3 class="station-title">La Creación y la Vida de José</h3>
+              <p class="station-learning">
+                Dios creó todas las cosas bellas con amor y siempre cuida de nuestras vidas y familias, guiando nuestros pasos tal como cuidó de José.
+              </p>
+              <div class="station-footer">
+                <button class="btn btn-secondary btn-sm" data-station-id="parvulos">
+                  Ver Detalles
+                </button>
+                <button class="btn-react" data-react-key="parvulos" title="Dar amor a esta estación">
+                  <span>❤️</span>
+                  <span id="reactCount-parvulos">29</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Estación 2: Principiantes -->
+          <article class="station-card">
+            <div class="station-media">
+              <span class="station-age-badge">6 a 7 años</span>
+              <img src="IMAGES/PRINCIPIANTES.png" alt="Estación Principiantes: ¿Qué es la Biblia?" loading="lazy">
+            </div>
+            <div class="station-body">
+              <div class="station-header-info">
+                <span class="station-group-name">Principiantes</span>
+                <span class="station-teachers">Rebeca & Fernanda</span>
+              </div>
+              <h3 class="station-title">¿Qué es la Biblia? Conociendo la Palabra</h3>
+              <p class="station-learning">
+                Comprender el origen sagrado de la Biblia, cómo se formó a través de los siglos y por qué es la lámpara que guía nuestra vida diaria.
+              </p>
+              <div class="station-footer">
+                <button class="btn btn-secondary btn-sm" data-station-id="principiantes">
+                  Ver Detalles
+                </button>
+                <button class="btn-react" data-react-key="principiantes" title="Dar amor a esta estación">
+                  <span>❤️</span>
+                  <span id="reactCount-principiantes">23</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Estación 3: Primarios -->
+          <article class="station-card">
+            <div class="station-media">
+              <span class="station-age-badge">8 a 9 años</span>
+              <img src="IMAGES/PRIMARIOS.png" alt="Estación Primarios: Moisés y el pueblo de Israel" loading="lazy">
+            </div>
+            <div class="station-body">
+              <div class="station-header-info">
+                <span class="station-group-name">Primarios</span>
+                <span class="station-teachers">Carmen & Benjamín</span>
+              </div>
+              <h3 class="station-title">Moisés y la Travesía de Israel</h3>
+              <p class="station-learning">
+                Exposición con maqueta 3D: Dios liberó con poder a Su pueblo de Egipto, abrió el Mar Rojo y nos enseña a confiar y obedecer Sus mandamientos.
+              </p>
+              <div class="station-footer">
+                <button class="btn btn-secondary btn-sm" data-station-id="primarios">
+                  Ver Detalles
+                </button>
+                <button class="btn-react" data-react-key="primarios" title="Dar amor a esta estación">
+                  <span>❤️</span>
+                  <span id="reactCount-primarios">35</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Estación 4: Intermedios -->
+          <article class="station-card">
+            <div class="station-media">
+              <span class="station-age-badge">10 a 11 años</span>
+              <img src="IMAGES/INTERMEDIOS.png" alt="Estación Intermedios: Vida de Jesús" loading="lazy">
+            </div>
+            <div class="station-body">
+              <div class="station-header-info">
+                <span class="station-group-name">Intermedios</span>
+                <span class="station-teachers">Miriam & Lía</span>
+              </div>
+              <h3 class="station-title">La Vida, Milagros y Misión de Jesús</h3>
+              <p class="station-learning">
+                Jesús vino para mostrarnos el amor incondicional del Padre, salvarnos del pecado mediante Su entrega en la cruz y triunfar en Su resurrección.
+              </p>
+              <div class="station-footer">
+                <button class="btn btn-secondary btn-sm" data-station-id="intermedios">
+                  Ver Detalles
+                </button>
+                <button class="btn-react" data-react-key="intermedios" title="Dar amor a esta estación">
+                  <span>❤️</span>
+                  <span id="reactCount-intermedios">30</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Estación 5: Preadolescentes -->
+          <article class="station-card">
+            <div class="station-media">
+              <span class="station-age-badge">12 a 14 años</span>
+              <img src="IMAGES/PREADOLESCENTES.png" alt="Estación Preadolescentes: Compartiendo el Evangelio" loading="lazy">
+            </div>
+            <div class="station-body">
+              <div class="station-header-info">
+                <span class="station-group-name">Preadolescentes</span>
+                <span class="station-teachers">Zulma</span>
+              </div>
+              <h3 class="station-title">Compartiendo el Evangelio – Gran Comisión</h3>
+              <p class="station-learning">
+                Conocer a Jesús implica asumir el reto valiente de compartir Su mensaje de esperanza y vivir con integridad y testimonio en el colegio.
+              </p>
+              <div class="station-footer">
+                <button class="btn btn-secondary btn-sm" data-station-id="preadolescentes">
+                  Ver Detalles
+                </button>
+                <button class="btn-react" data-react-key="preadolescentes" title="Dar amor a esta estación">
+                  <span>❤️</span>
+                  <span id="reactCount-preadolescentes">26</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Estación 6: Adolescentes y Jóvenes -->
+          <article class="station-card">
+            <div class="station-media">
+              <span class="station-age-badge">15 a 18 años</span>
+              <img src="IMAGES/ADOLESCENTES.png" alt="Estación Adolescentes: Fruto del Espíritu" loading="lazy">
+            </div>
+            <div class="station-body">
+              <div class="station-header-info">
+                <span class="station-group-name">Adolescentes y Jóvenes</span>
+                <span class="station-teachers">Dámaso</span>
+              </div>
+              <h3 class="station-title">El Fruto del Espíritu en la Vida Diaria</h3>
+              <p class="station-learning">
+                El Espíritu Santo capacita a la juventud para transformar su carácter produciendo amor, gozo, paz, paciencia, fe, bondad y dominio propio.
+              </p>
+              <div class="station-footer">
+                <button class="btn btn-secondary btn-sm" data-station-id="adolescentes">
+                  Ver Detalles
+                </button>
+                <button class="btn-react" data-react-key="adolescentes" title="Dar amor a esta estación">
+                  <span>❤️</span>
+                  <span id="reactCount-adolescentes">33</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECCIÓN MINIJUEGO INTERACTIVO: EL DESAFÍO BÍBLICO DEL PINGÜINO
+         ========================================================================== -->
+    <section class="trivia-section" id="trivia">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge-tag">Juego Interactivo</span>
+          <h2 class="section-title">El Desafío Bíblico del Pingüino 🐧</h2>
+          <p class="section-subtitle">Demuestra cuánto has aprendido de las estaciones bíblicas con esta trivia dinámica.</p>
+        </div>
+
+        <div class="trivia-box" id="triviaBox">
+          <div class="trivia-header">
+            <div id="triviaProgress" class="badge-tag pastel">Pregunta 1 de 4</div>
+            <h3 style="color: var(--color-guinda); margin-top: 0.5rem; font-size: clamp(1.2rem, 3vw, 1.5rem);">¿Cuánto conoces de las estaciones?</h3>
+          </div>
+          <div class="trivia-question-box">
+            <div id="triviaQuestion" class="trivia-question-text">Cargando pregunta bíblica...</div>
+          </div>
+          <div id="triviaOptions" class="trivia-options-grid"></div>
+          <div id="triviaFeedback" class="trivia-feedback"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECCIÓN MINI KERMESSE & ZONA DE VENTAS
+         ========================================================================== -->
+    <section class="kermesse-section" id="kermesse">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge-tag">Gastronomía y Dulces</span>
+          <h2 class="section-title">Mini Kermesse & Zona de Ventas</h2>
+          <p class="section-subtitle">Disfruta de ricos platillos preparados con amor y apoya los proyectos de nuestra Escuela Dominical.</p>
+        </div>
+
+        <div class="kermesse-grid">
+          <!-- Tarjeta 1: Apoyo Ministerio de la Mujer -->
+          <div class="kermesse-card">
+            <div class="kermesse-media">
+              <img src="IMAGES/APOYO MINISTERIO DE LA MUJER.png" alt="Apoyo del Ministerio de la Mujer en la cocina de la kermesse" loading="lazy">
+            </div>
+            <div class="kermesse-body">
+              <span class="badge-tag pastel">Cocina Solidaria</span>
+              <h3 style="font-size: 1.35rem; color: var(--color-guinda); margin-bottom: 0.5rem;">
+                Apoyo del Ministerio de la Mujer
+              </h3>
+              <p style="color: var(--color-text-muted); font-size: 0.95rem;">
+                Nuestras queridas hermanas lideran la cocina preparando deliciosos almuerzos para toda la congregación, promoviendo la comunión fraternal.
+              </p>
+              <div class="menu-tags">
+                <span class="menu-tag">🍗 Platos Tradicionales</span>
+                <span class="menu-tag">🥗 Ensaladas Frescas</span>
+                <span class="menu-tag">🥤 Refrescos Naturales</span>
+                <span class="menu-tag">🍲 Menú Familiar</span>
+              </div>
+              <div style="margin-top: auto;">
+                <a href="#cooperacion" class="btn btn-secondary btn-sm" style="width: 100%;">
+                  Sumarme al Apoyo
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta 2: Zona de Ventas y Postres -->
+          <div class="kermesse-card">
+            <div class="kermesse-media">
+              <img src="IMAGES/VENTAS.png" alt="Zona de Ventas de galletas y postres caseros" loading="lazy">
+            </div>
+            <div class="kermesse-body">
+              <span class="badge-tag pastel">Rincón Dulce & Recuerdos</span>
+              <h3 style="font-size: 1.35rem; color: var(--color-guinda); margin-bottom: 0.5rem;">
+                Zona de Ventas y Repostería
+              </h3>
+              <p style="color: var(--color-text-muted); font-size: 0.95rem;">
+                Deliciosas galletas artesanales con formas de estrellas, queques caseros, gelatinas de colores, plantitas decoradas y recuerdos hechos con cariño.
+              </p>
+              <div class="menu-tags">
+                <span class="menu-tag">⭐ Galletitas de Estrellas</span>
+                <span class="menu-tag">🧁 Cupcakes Decorados</span>
+                <span class="menu-tag">🍮 Postres y Gelatinas</span>
+                <span class="menu-tag">🪴 Macetitas de Bendición</span>
+              </div>
+              <div style="margin-top: auto;">
+                <a href="#cooperacion" class="btn btn-secondary btn-sm" style="width: 100%;">
+                  Ver Familias en Apoyo
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECCIÓN META: IMPRESORA PROPIA PARA LA EDB (SIN MONTOS NI COMENTARIOS)
+         ========================================================================== -->
+    <section class="printer-goal-section" id="cooperacion">
+      <div class="container">
+        <div class="goal-card">
+          <div class="goal-grid">
+            <div class="goal-info">
+              <span class="badge-tag">Meta EDB</span>
+              <h2 class="section-title">Una Impresora Propia para los Niños</h2>
+              <p style="color: var(--color-text-muted); font-size: 1.05rem; line-height: 1.6;">
+                Cada semana nuestros maestros necesitan imprimir fichas de dibujo, versículos, manualidades y material didáctico para las 6 clases de la Escuela Dominical. Contar con una impresora multifuncional propia permitirá que ningún niño se quede sin su material de estudio cada domingo.
+              </p>
+
+              <div class="goal-counter-banner">
+                <div class="counter-icon">🖨️</div>
+                <div>
+                  <div class="counter-number" id="collaboratorsCount">18 familias</div>
+                  <div class="counter-text">ya se han sumado con alegría para apoyar esta meta.</div>
+                </div>
+              </div>
+
+              <!-- Contacto Directo con la Coordinadora -->
+              <div class="contact-box-accent">
+                <h4 style="color: var(--color-guinda); margin-bottom: 0.25rem;">Coordinación Directa:</h4>
+                <p style="font-size: 0.95rem; margin-bottom: 0.85rem;">
+                  Responsable: <strong>Hna. Rebeca Quispe</strong> (Directiva EDB)<br>
+                  Teléfono / WhatsApp: <strong>75855943</strong>
+                </p>
+                <a href="https://wa.me/59175855943?text=Hola%20hermana%20Rebeca,%20deseo%20apoyar%20con%20la%20meta%20de%20la%20impresora%20para%20la%20Escuela%20Dominical" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm btn-whatsapp">
+                  <span>Escribir por WhatsApp</span>
+                  <span class="btn-icon">💬</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Formulario Simple de Apoyo (Solo Nombre y Tipo de Apoyo) -->
+            <div class="cooperation-form-box">
+              <h3 style="color: var(--color-guinda); margin-bottom: 0.4rem; font-size: 1.35rem;">
+                Suma a Tu Familia al Apoyo
+              </h3>
+              <p style="font-size: 0.88rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">
+                Indícanos de qué manera deseas sumarte a este hermoso proyecto:
+              </p>
+
+              <form id="cooperationForm">
+                <div class="form-group">
+                  <label class="form-label" for="collabName">Nombre o Familia *</label>
+                  <input type="text" id="collabName" class="form-input" placeholder="Ej: Familia Mamani Quispe" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="collabType">¿Cómo deseas apoyar?</label>
+                  <select id="collabType" class="form-select">
+                    <option value="Apoyo en la Kermesse y Almuerzo">Consumo y reserva de platos en la Kermesse</option>
+                    <option value="Apoyo en la Zona de Postres y Dulces">Compra de postres y dulces en la feria</option>
+                    <option value="Colaboración voluntaria para la Impresora">Colaboración solidaria para la Impresora</option>
+                    <option value="Oración y Apoyo Logístico">Oración y apoyo en la organización</option>
+                  </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                  <span>¡Sumar Mi Familia! 🌟</span>
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Muro de Familias en Apoyo (Sin comentarios ni dinero) -->
+          <div class="families-support-section">
+            <h4 style="color: var(--color-guinda); font-size: 1.2rem; margin-bottom: 0.5rem;">
+              🤝 Familias y Hermanos en Apoyo
+            </h4>
+            <p style="font-size: 0.88rem; color: var(--color-text-muted); margin-bottom: 1rem;">
+              Lista de familias comprometidas con el crecimiento de la Escuela Dominical:
+            </p>
+            <div class="families-chips-container" id="familiesContainer">
+              <!-- Se genera dinámicamente con app.js -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECCIÓN INTEGRACIÓN FAMILIAR Y COMUNIDAD
+         ========================================================================== -->
+    <section class="family-section" id="familias">
+      <div class="container">
+        <div class="family-card">
+          <div class="family-media">
+            <img src="IMAGES/PARTICIPACION DE FAMILIA.png" alt="Participación de Familias y Comunidad en la Escuela Dominical" loading="lazy">
+          </div>
+          <div class="family-content">
+            <span class="badge-tag">Hogar & Fe</span>
+            <h2 class="section-title">La Familia: El Primer Templo</h2>
+            <p style="margin-bottom: 1rem;">
+              La feria "La Biblia en Acción" está diseñada para unir generaciones. Papás, mamás, abuelitos y tíos están invitados de honor para acompañar a los niños, escuchar sus disertaciones y celebrar juntos la obra del Espíritu Santo.
+            </p>
+            <p style="color: var(--color-text-muted); margin-bottom: 1.5rem;">
+              Al finalizar las exposiciones, tendremos un tiempo congregacional de acción de gracias, oración por las familias y entrega de diplomas de reconocimiento.
+            </p>
+            <a href="#inicio" class="btn btn-primary">
+              <span>¡Nos Vemos el 27 de Octubre!</span>
+              <span class="btn-icon">🎈</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECCIÓN CONTACTO Y UBICACIÓN
+         ========================================================================== -->
+    <section class="contact-section" id="contacto">
+      <div class="container" style="text-align: center;">
+        <div class="badge-tag pastel">Información de Asistencia</div>
+        <h2 class="section-title" style="margin-bottom: 0.5rem;">¿Dónde y Cuándo?</h2>
+        <p class="section-subtitle" style="margin-bottom: 2rem;">
+          Te esperamos con los brazos abiertos junto a toda tu familia.
+        </p>
+
+        <div class="contact-cards-grid">
+          <div class="contact-card">
+            <div class="contact-icon">⛪</div>
+            <h4 style="color: var(--color-guinda);">Lugar</h4>
+            <p style="color: var(--color-text-muted);">Iglesia Asambleas de Dios Olivos</p>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-icon">📅</div>
+            <h4 style="color: var(--color-guinda);">Fecha Central</h4>
+            <p style="color: var(--color-text-muted);">Domingo 27 de Octubre de 2026</p>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-icon">📱</div>
+            <h4 style="color: var(--color-guinda);">Contacto EDB</h4>
+            <p style="color: var(--color-text-muted);">Rebeca Quispe — Cel. 75855943</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       MODAL INTERACTIVO DE ESTACIONES BÍBLICAS (RESPONSIVO)
+       ========================================================================== -->
+  <div class="modal-backdrop" id="stationModal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Cerrar modal">×</button>
+      <div class="modal-header-image">
+        <img id="modalImage" src="" alt="">
+      </div>
+      <div class="modal-body">
+        <span class="badge-tag pastel" id="modalGroup">Grupo</span>
+        <h3 id="modalTitle" style="color: var(--color-guinda); font-size: clamp(1.3rem, 4vw, 1.6rem); margin: 0.5rem 0;">Título</h3>
+        <p id="modalTeachers" style="font-weight: 700; color: var(--color-text-muted); margin-bottom: 1rem;">Maestros</p>
+
+        <div class="modal-verse-box">
+          <strong style="color: var(--color-guinda);">Versículo Clave:</strong>
+          <div id="modalVerse" style="font-style: italic; font-size: 0.92rem; margin-top: 0.2rem;"></div>
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+          <h4 style="color: var(--color-guinda); font-size: 1rem; margin-bottom: 0.3rem;">🎯 ¿Qué queremos que aprendan?</h4>
+          <p id="modalObjective" style="font-size: 0.92rem; color: var(--color-text-main);"></p>
+        </div>
+
+        <div style="margin-bottom: 1.25rem;">
+          <h4 style="color: var(--color-guinda); font-size: 1rem; margin-bottom: 0.3rem;">🎨 Maqueta y Materiales en el Stand:</h4>
+          <p id="modalMaterials" style="font-size: 0.92rem; color: var(--color-text-muted);"></p>
+        </div>
+
+        <p id="modalQuote" style="font-size: 0.88rem; color: #887B95; font-style: italic; border-top: 1px dashed var(--color-border); padding-top: 0.75rem;"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       PIE DE PÁGINA (FOOTER RESPONSIVO)
+       ========================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+            <span style="font-size: 1.8rem;">🐧</span>
+            <h3 style="margin: 0;">La Biblia en Acción</h3>
+          </div>
+          <p style="font-size: 0.95rem; line-height: 1.5; color: #BBB0C8;">
+            Feria del Mes de la Biblia organizada con alegría y amor por la Escuela Dominical de la Iglesia Asambleas de Dios Olivos.
+          </p>
+          <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--color-rosado);">
+            Lema: <em>“Aprender, participar y compartir”</em>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Secciones</h4>
+          <ul class="footer-links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#estaciones">Estaciones por Curso</a></li>
+            <li><a href="#cronograma">Cronograma de Fases</a></li>
+            <li><a href="#trivia">Desafío Bíblico</a></li>
+            <li><a href="#kermesse">Kermesse & Ventas</a></li>
+            <li><a href="#cooperacion">Meta Impresora Propia</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Organización</h4>
+          <ul class="footer-links">
+            <li>Pastor: Ptr. David Mamani</li>
+            <li>Directiva: Rebeca Quispe & Miriam Orellana</li>
+            <li>Contacto: 75855943</li>
+            <li>Iglesia Asambleas de Dios Olivos</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Escuela Dominical EDB — Iglesia Asambleas de Dios Olivos. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
