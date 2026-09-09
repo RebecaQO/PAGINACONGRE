@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // CONTADOR REGRESIVO AL 27 DE OCTUBRE
 // ==========================================================================
 function initCountdown() {
-  const eventDate = new Date('2026-10-27T09:00:00').getTime();
+  const eventDate = new Date('2026-09-27T09:00:00').getTime();
 
   function update() {
     const now = new Date().getTime();
@@ -415,7 +415,7 @@ function showTriviaResults() {
   triggerConfetti();
 }
 
-window.restartTrivia = function() {
+window.restartTrivia = function () {
   currentTriviaIndex = 0;
   triviaScore = 0;
   const box = document.getElementById('triviaBox');
